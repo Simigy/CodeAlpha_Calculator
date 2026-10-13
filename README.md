@@ -3,7 +3,7 @@
 A fully responsive calculator built with vanilla HTML, CSS, and JavaScript.
 
 ##  Live Demo
-_Coming soon (GitHub Pages)_
+https://simigy.github.io/CodeAlpha_Calculator/
 
 ##  Features
 - Basic arithmetic: +, −, ×, ÷
