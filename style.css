@@ -1,0 +1,231 @@
+/* ===========    1. THEME VARIABLES (light + dark)    =================== */
+
+/* Light theme (default) */
+:root {
+  --bg-page:        #f0f2f5;
+  --bg-calculator:  #ffffff;
+  --bg-display:     #f8f9fb;
+  --bg-number:      #e8eaed;
+  --bg-operator:    #4a90e2;
+  --bg-equals:      #2ecc71;
+  --bg-clear:       #e74c3c;
+  --bg-delete:      #f39c12;
+
+  --text-main:      #1a1a1a;
+  --text-secondary: #666666;
+  --text-on-color:  #ffffff;
+
+  --border-color:   #d0d0d0;
+  --shadow:         0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme (applies when body has data-theme="dark") */
+body[data-theme="dark"] {
+  --bg-page:        #1a1a2e;
+  --bg-calculator:  #16213e;
+  --bg-display:     #0f3460;
+  --bg-number:      #2c3e50;
+  --bg-operator:    #e67e22;
+  --bg-equals:      #27ae60;
+  --bg-clear:       #c0392b;
+  --bg-delete:      #d35400;
+
+  --text-main:      #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-on-color:  #ffffff;
+
+  --border-color:   #2c3e50;
+  --shadow:         0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========    2. GLOBAL / RESET    ======================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-page);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  transition: background-color 0.3s ease;
+  padding: 20px;
+}
+
+/* ==========    3. THEME TOGGLE BUTTON    ======================= */
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  background-color: var(--bg-calculator);
+  color: var(--text-main);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  z-index: 100;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+/* ============    4. CALCULATOR CONTAINER    =================== */
+
+.calculator {
+  width: 100%;
+  max-width: 340px;
+  background-color: var(--bg-calculator);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===========    5. DISPLAY SCREEN   ======================= */
+
+.display {
+  background-color: var(--bg-display);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: right;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-wrap: break-word;
+  word-break: break-all;
+  transition: background-color 0.3s ease;
+}
+
+.previous-operand {
+  font-size: 16px;
+  color: var(--text-secondary);
+  min-height: 20px;
+  transition: color 0.3s ease;
+}
+
+.current-operand {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: color 0.3s ease;
+}
+
+/* ===========    6. BUTTONS GRID    ====================== */
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 18px 0;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--bg-number);
+  color: var(--text-main);
+  transition: transform 0.1s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* Button types */
+.btn-operator {
+  background-color: var(--bg-operator);
+  color: var(--text-on-color);
+}
+
+.btn-equals {
+  background-color: var(--bg-equals);
+  color: var(--text-on-color);
+}
+
+.btn-clear {
+  background-color: var(--bg-clear);
+  color: var(--text-on-color);
+}
+
+.btn-delete {
+  background-color: var(--bg-delete);
+  color: var(--text-on-color);
+}
+
+.span-two {
+  grid-column: span 2;
+}
+
+
+
+/* ===========    7. MOBILE RESPONSIVE    ======================= */
+
+@media (max-width: 400px) {
+  .calculator {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .btn {
+    font-size: 18px;
+    padding: 15px 0;
+  }
+
+  .current-operand {
+    font-size: 30px;
+  }
+
+  .theme-toggle {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+}
+
+/* =========    8. THEME TOGGLE — SVG ICONS    ====================== */
+
+.theme-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+/* By default: show moon, hide sun */
+.icon-moon { display: block; }
+.icon-sun  { display: none;  }
+
+/* When dark theme is active: show sun, hide moon */
+body[data-theme="dark"] .icon-moon { display: none;  }
+body[data-theme="dark"] .icon-sun  { display: block; }
+
+/* Small rotation animation when switching */
+.theme-toggle:hover .icon {
+  transform: rotate(20deg);
+}
